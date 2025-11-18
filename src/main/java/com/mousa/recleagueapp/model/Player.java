@@ -1,6 +1,5 @@
 package com.mousa.recleagueapp.model;
 
-
 import jakarta.persistence.*;
 
 @Entity
