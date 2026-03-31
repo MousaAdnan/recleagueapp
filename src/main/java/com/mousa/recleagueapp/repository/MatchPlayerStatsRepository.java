@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MatchPlayerStatsRepository extends JpaRepository<MatchPlayerStats, Long> {
-    List<MatchPlayerStats> findbyMatchId(Long matchId);
+    List<MatchPlayerStats> findByMatchId(Long matchId);
+
+    // Historical stats for a set of players.
+    List<MatchPlayerStats> findByPlayerIdIn(List<Integer> playerIds);
 }
