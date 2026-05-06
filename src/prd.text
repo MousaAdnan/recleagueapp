@@ -1,0 +1,227 @@
+RecLeagueApp – Product Requirements & Technical Specification
+
+1. PROJECT OVERVIEW
+
+RecLeagueApp is a web application designed to automate the organization and tracking of cricket matches currently coordinated through a WhatsApp group.
+
+Current manual workflow:
+- Organizer creates poll for attendance
+- First 16 players join
+- Teams selected manually
+- Scorecard photo uploaded to an AI to generate match report and to input scores into website
+- Player statistics tracked informally
+
+Goal: Build a centralized system, a website, to manage:
+• Players
+• Matches
+• Per-match statistics
+• Leaderboards
+• Match reports
+• Team balancing
+
+
+2. PRODUCT GOALS
+
+Primary Goals
+1. Centralize cricket league data
+2. Automate match stat tracking
+3. Generate match reports
+4. Provide player leaderboards
+5. Reduce organizer workload
+6. Improve engagement among players
+
+
+3. USERS
+
+Organizer
+• Creates matches
+• Uploads scorecards
+• Manages results
+
+Players
+• View match history
+• Track personal statistics
+• View leaderboards
+
+
+4. CORE FEATURES
+
+Player Management
+• Create players
+• View player profiles
+
+Match Management
+• Create match records
+• Store teams
+• Track results
+
+Match Statistics
+Track for each player per match:
+• Runs
+• Runs conceded
+• Wickets
+• Overs bowled
+• Contributions
+
+Leaderboards
+Automatically generated rankings:
+• Most runs
+• Most wickets
+• Best economy
+• Most wins
+
+Future
+• Automatic match reports
+* Whatsapp bot
+
+5. TECHNOLOGY STACK
+
+Backend
+• Java 21
+• Spring Boot 3.5.7
+• Spring Web
+• Spring Data JPA
+• PostgreSQL
+• pgAdmin
+• Maven
+
+Frontend (Future)
+• React SPA
+• TypeScript
+
+Version Control
+• Git
+• GitHub
+• .gitignore protects secrets
+
+
+6. SYSTEM ARCHITECTURE
+
+SQL Database
+      ↓
+JPA Entities
+      ↓
+Repositories
+      ↓
+Controllers
+      ↓
+REST API
+      ↓
+Frontend / Browser
+
+
+7. DATABASE SCHEMA
+
+players
+id SERIAL PRIMARY KEY
+name VARCHAR(100) NOT NULL
+
+matches
+id SERIAL PRIMARY KEY
+match_date DATE NOT NULL
+location VARCHAR(200)
+pitch INT
+man_of_the_match_id INT
+result VARCHAR(200)
+team_a VARCHAR(100)
+team_b VARCHAR(100)
+
+player_match_stats
+id SERIAL PRIMARY KEY
+player_id INT REFERENCES players(id)
+match_id INT REFERENCES matches(id)
+team_name VARCHAR(100)
+runs INT
+runs_conceded INT
+wickets INT
+overs_bowled FLOAT
+contributions INT
+
+
+8. SPRING BOOT PROJECT STRUCTURE
+
+src/main/java/com/mousa/recleagueapp
+
+RecleagueappApplication.java
+
+model/
+    Player.java
+
+repository/
+    PlayerRepository.java
+
+controller/
+    HelloController.java
+    PlayerController.java
+
+
+9. ENVIRONMENT CONFIGURATION
+
+File:
+src/main/resources/application.properties
+
+Example configuration:
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/cricket_app
+spring.datasource.username=postgres
+spring.datasource.password=LOCAL_PASSWORD
+
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+
+10. CURRENT DEVELOPMENT STATUS
+
+Completed
+• PostgreSQL installed
+• Database created
+• Tables created
+• Spring Boot project initialized
+• Player entity implemented
+• PlayerRepository implemented
+
+Next Step
+Create PlayerController
+
+Endpoint:
+GET /players
+
+Expected Response:
+
+[
+  { "id": 1, "name": "Mousa" },
+  { "id": 2, "name": "Ali" }
+]
+
+
+11. FUTURE FEATURES
+
+Scorecard OCR
+Upload scorecard image → extract stats automatically.
+
+Match Report Generation
+AI-generated summaries including:
+• Match highlights
+• Player performances
+
+Team Balancing Algorithm
+Use historical stats to generate fair teams.
+
+WhatsApp Integration
+Possible features:
+• Match reminders
+• Signup bot
+• Automated match reports
+
+
+12. LONG-TERM VISION
+
+RecLeagueApp evolves into a full cricket league platform including:
+
+• Player analytics
+• Match history
+• Automated reporting
+• Team optimization
+• Mobile-friendly interface
+• Messaging integrations

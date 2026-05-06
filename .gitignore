@@ -35,5 +35,20 @@ build/
 # macOS files
 .DS_Store
 
-# Ignore applicatoin.properties so DB password is never comitted
+# Ignore application.properties so DB password is never committed
 src/main/resources/application.properties
+
+# Environment variable files
+.env
+.env.*
+!.env.example
+
+# Claude Code memory/session files
+.claude/
+
+# Design references (local only)
+src/references/
+
+# Frontend build artifacts
+frontend/node_modules/
+frontend/dist/

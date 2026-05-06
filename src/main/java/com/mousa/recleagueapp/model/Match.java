@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "match_date", nullable = false)
     private LocalDateTime startTime;

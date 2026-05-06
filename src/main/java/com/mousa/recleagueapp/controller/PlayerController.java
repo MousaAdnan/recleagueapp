@@ -2,8 +2,8 @@ package com.mousa.recleagueapp.controller;
 
 import com.mousa.recleagueapp.model.Player;
 import com.mousa.recleagueapp.repository.PlayerRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -11,14 +11,18 @@ import java.util.List;
 public class PlayerController {
     private final PlayerRepository playerRepository;
 
-    public PlayerController(PlayerRepository playerRepository){
+    public PlayerController(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
 
-    // Get /players returns all players as JSON
     @GetMapping("/players")
-    public List<Player> getAllPlayers(){
+    public List<Player> getAllPlayers() {
         return playerRepository.findAll();
     }
 
+    @PostMapping("/players")
+    public Player createPlayer(@Valid @RequestBody Player player) {
+        player.SetId(null); // prevent client-supplied ID overwriting existing records
+        return playerRepository.save(player);
+    }
 }
