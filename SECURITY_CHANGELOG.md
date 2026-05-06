@@ -8,7 +8,7 @@ A running log of changes made purely for security reasons.
 
 ### Credential Externalization
 - **File:** `src/main/resources/application.properties`
-- **Change:** Replaced hardcoded DB password with `${DB_PASSWORD}` environment variable. `DB_URL` and `DB_USERNAME` use env vars with safe local defaults.
+- **Change:** Moved database configuration to environment variables. `DB_URL` and `DB_USERNAME` use env vars with safe local defaults.
 - **Risk mitigated:** Plaintext credentials in source files.
 
 ### Safe Config Template
